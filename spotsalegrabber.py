@@ -17,7 +17,7 @@ closeoutURL = 'http://skateparkoftampa.com/spot/closeout.aspx'
 
 #Download and parse the page using BeautifulSoup
 basepageHTML = urllib2.urlopen(closeoutURL).read()
-basepageSoup = BeautifulSoup(basepageHTML)
+basepageSoup = BeautifulSoup(basepageHTML, "lxml")
 
 #Get the number of sale pages.
 #The links to each page are under the "ProductPager" class div
@@ -28,7 +28,7 @@ print "Number of Products List Pages: " + str(numPages)
 
 def parseListPage(listpageURL):
 	listpageHTML = urllib2.urlopen(listpageURL).read()
-	listpageSoup = BeautifulSoup(listpageHTML)
+	listpageSoup = BeautifulSoup(listpageHTML, "lxml")
 	
 	productsOnPage = listpageSoup.find_all('div', class_="ProductBlock")
 	
@@ -69,7 +69,7 @@ def parseProduct(productPageURL):
 
 	#Open the product page with BeautifulSoup
 	productpageHTML = urllib2.urlopen(productURL).read()
-	productpageSoup = BeautifulSoup(productpageHTML)
+	productpageSoup = BeautifulSoup(productpageHTML, "lxml")
 	
 	#Take the product name from the title of the page by Stripping out the rest of the text
 	productName = productpageSoup.title.string.replace(" in stock at SPoT Skate Shop", "").strip('\r\n\t')

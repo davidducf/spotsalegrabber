@@ -83,8 +83,13 @@ def parseProduct(productPageURL):
 	
 	priceDiv = productpageSoup.find('div', class_='Ollie')
 	
+	# if the "Ollie" divs hav any 'a' elements, it is not what we want to parse.  move on to the next one.
+	if(priceDiv.a):
+		return
+	
 	regexPattern = ".*Reg Price: \$(?P<priceOriginal>.+) Your Price: \$(?P<priceSale>.+).*"
 	regexMatch = re.match(regexPattern , priceDiv.get_text())
+	
 	
 	#Assign the values we get from regexing the priceDivs
 	productPriceOriginal = regexMatch.group('priceOriginal')

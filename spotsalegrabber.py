@@ -90,7 +90,6 @@ def parseProduct(productPageURL):
 	regexPattern = ".*Reg Price: \$(?P<priceOriginal>.+) Your Price: \$(?P<priceSale>.+).*"
 	regexMatch = re.match(regexPattern , priceDiv.get_text())
 	
-	
 	#Assign the values we get from regexing the priceDivs
 	productPriceOriginal = regexMatch.group('priceOriginal')
 	productPriceSale = regexMatch.group('priceSale')
